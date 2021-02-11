@@ -1,0 +1,35 @@
+{% extends 'basic.html' %}
+{% block title %}
+Brands Page
+{% endblock %}
+{% block content %}
+
+
+    <div class="owl-carousel owl-prods owl-theme px-md-5 p-0 py-4"  >
+    	{% for i in brands %}
+    	
+<div class="item px-md-5 w-100 px-2" >
+        <div class=" px-2">
+      <img src="/media/{{i.prod_image}}" class="img-fluid">
+    </div>
+    <div>
+      <div class="itemdesc w-100 m-0 p-0 bg-light">
+      <h4 class="text-center product_title m-0 p-0"><a href="/product/{{i.product_id}}">{{i.prod_name}}</a></h4>
+  
+   
+    <p class="price bg-light text-center" >₹{{i.prod_price}}</p>
+    <p class="text-center addtocart" data-prodid="{{ i.product_id }}" style="cursor: pointer;"><i data-prodid="{{ i.product_id }}" style="color:darkcyan;" class="fa fa-shopping-bag"></i>Add To Cart</p>
+    <p class="text-center addtowish" data-prodid="{{ i.product_id }}" style="cursor: pointer;"> <i class="fa fa-heart" data-prodid="{{ i.product_id }}" style="color:darkcyan;"></i>Add to Wishlist</p>
+<!--    <p class="incdecbtn"> <button class="dec">-</button><span class="px-3 prodquantity" testprodid="{{ i.product_id }}" style="font-weight: bolder" >1</span><button class="inc">+</button> </p> -->
+
+   </div>
+ 
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

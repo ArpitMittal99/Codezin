@@ -1,0 +1,182 @@
+{% extends 'basic.html' %}
+{{products}}
+{% block css %}
+<style type="text/css">
+	.dec,.inc
+{
+  padding:5px 15px;
+  background-color: darkcyan;
+  color: #fff;
+  border-radius:50%;
+  border:none;
+}
+.dec:focus,.inc:focus
+{
+	outline: none;
+}
+.prodtable
+{
+	max-width: 100%;
+	overflow: auto;
+
+}
+.incdec
+{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+</style>
+{% endblock %}
+{% block  content %}
+ 
+ {% if products %}
+ <h3 class="text-center my-5 mt-2" ><b style="border-left: 3px solid green;padding: 10px;"><span style="border-bottom: 3px solid green;padding: 0px;color: rgb(15, 137, 105)">Products in My Cart</span></b></h3>
+<div class="mx-md-5 prodtable" >
+
+<table class="table table-bordered table-info text-center" style="color: rgb(17, 132, 119);">
+  <thead>
+    <td><b>S. No</b></td>
+    <td><b>Image</b></td>
+
+    <td><b>Name</b></td>
+    <td><b>Quantity(in kg)</b></td>
+    <td><b>Price</b></td>
+    <td><b>Remove</b></td>
+  </thead>
+<!-- 
+  <p class="text-center text-danger"><b>No Product Present in the Cart</b></p>
+<a href="/manufacturer/products/" class="btn btn-sm btn-outline-info nav-link my-3 ">Back To Shopping</a> -->
+
+
+
+  {% for i in products %}
+  <tr>
+    <td>1</td>
+    <td><img src="/media/{{i.prod_image}}/" width="50px" height="50px"></td>
+
+    <td>{{i.prod_name }}</td>
+    <td  class="incdec"><button class="dec">-</button><span class="px-3 prodquantity" testprodid="{{ i.product_id }}" style="font-weight: bolder" >{% for x,j in prodid_quant.items %} {% if x == i.product_id %}{{j}} {% endif %}{% endfor %}</span><button class="inc">+</button> </td>
+    <td class="{{ i.product_id }}">{{ i.prod_price }}</td>
+    <td><a href="#" data-delprod="{{ i.product_id }}" class="btn btn-sm btn-outline-danger removeprod" >Remove</a>
+     </td>
+
+  </tr>
+  {% endfor %}
+
+  
+</table>
+</div>
+{% endif %}
+{% if products2 %}
+<h3 class="text-center text-primary">Bestseller products</h3>
+<div class="mx-md-5 prodtable" >
+
+<table class="table table-bordered table-info text-center" style="color: rgb(17, 132, 119);">
+  <thead>
+    <td><b>S. No</b></td>
+    <td><b>Image</b></td>
+
+    <td><b>Name</b></td>
+    <td><b>Quantity(in kg)</b></td>
+    <td><b>Price</b></td>
+    <td><b>Remove</b></td>
+  </thead>
+<!-- 
+  <p class="text-center text-danger"><b>No Product Present in the Cart</b></p>
+<a href="/manufacturer/products/" class="btn btn-sm btn-outline-info nav-link my-3 ">Back To Shopping</a> -->
+
+
+
+  {% for i in products2 %}
+  <tr>
+    <td>1</td>
+    <td><img src="/media/{{i.bestseller_image}}/" width="50px" height="50px"></td>
+
+    <td>{{i.bestseller_name }}</td>
+    <td  class="incdec"><button class="dec">-</button><span class="px-3 prodquantity" testprodid="{{ i.bestseller_id }}" style="font-weight: bolder" >{% for x,j in prodid_quant.items %} {% if x == i.bestseller_id %}{{j}} {% endif %}{% endfor %}</span><button class="inc">+</button> </td>
+    <td class="{{ i.bestseller_id }}">{{ i.bestseller_price }}</td>
+    <td><a href="#" data-delprod="{{ i.bestseller_id }}" class="btn btn-sm btn-outline-danger removeprod" >Remove</a>
+     </td>
+
+  </tr>
+  {% endfor %}
+
+  
+</table>
+</div>
+{% endif %}
+{% if products3 %}
+<h3 class="text-center text-primary">Offers</h3>
+<div class="mx-md-5 prodtable" >
+
+<table class="table table-bordered table-info text-center" style="color: rgb(17, 132, 119);">
+  <thead>
+    <td><b>S. No</b></td>
+    <td><b>Image</b></td>
+
+    <td><b>Name</b></td>
+    <td><b>Quantity(in kg)</b></td>
+    <td><b>Price</b></td>
+    <td><b>Remove</b></td>
+  </thead>
+<!-- 
+  <p class="text-center text-danger"><b>No Product Present in the Cart</b></p>
+<a href="/manufacturer/products/" class="btn btn-sm btn-outline-info nav-link my-3 ">Back To Shopping</a> -->
+
+
+
+  {% for i in products3 %}
+  <tr>
+    <td>1</td>
+    <td><img src="/media/{{i.offer_image}}/" width="50px" height="50px"></td>
+
+    <td>{{i.offer_name }}</td>
+    <td  class="incdec"><button class="dec">-</button><span class="px-3 prodquantity" testprodid="{{ i.offer_id }}" style="font-weight: bolder" >{% for x,j in prodid_quant.items %} {% if x == i.offer_id %}{{j}} {% endif %}{% endfor %}</span><button class="inc">+</button> </td>
+    <td class="{{ i.offer_id }}">{{ i.offer_price }}</td>
+    <td><a href="#" data-delprod="{{ i.offer_id }}" class="btn btn-sm btn-outline-danger removeprod" >Remove</a>
+     </td>
+
+  </tr>
+  {% endfor %}
+
+  
+</table>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script type="text/javascript">
+ Array.from(document.getElementsByClassName('removeprod')).map(elem=>elem.addEventListener('click',RemoveLS));
+function RemoveLS(e)
+{
+	e.preventDefault();
+var delprod=this.getAttribute('data-delprod')
+  var ls=JSON.parse(localStorage.getItem('mycart'));
+  if(ls == null || ls== undefined)
+  {
+  	    axios.post('/sessionstore/',{
+   "Cart":{}
+  }).then(function(response){
+          console.log(response.data);
+           	  window.location="/"
+         }).catch(err=>console.log(err));
+
+  }
+  // console.log(delprod)
+  // console.log(ls);
+  delete ls[delprod]
+  localStorage.setItem('mycart',JSON.stringify(ls));
+    axios.post('/sessionstore/',{
+   "Cart":ls
+  }).then(function(response){
+          console.log(response.data);
+          location.reload();
+         }).catch(err=>console.log(err));
+
+
+}
+</script>
+{% endblock %}

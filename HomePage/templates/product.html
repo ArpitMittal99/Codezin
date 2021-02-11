@@ -1,0 +1,33 @@
+{% extends 'basic.html' %}
+
+{% block title%} {{product.prod_name}} - My Awesome Cart{% endblock %}
+{% block body %}
+<div class="container my-4">
+    <div class="row">
+    <div class="col-md-4">
+    <div class="row">
+        <img src="/media/{{prod.image}}" width="233px" height="385px">
+    </div>
+        <div class="row">
+            <button class="btn btn-primary mx-3">Buy Now</button>
+            <button class="btn btn-primary">Add To Cart</button>
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+        <h5>{{product.prod_name}}</h5>
+        <p><b>Rs.{{prod.price}} </b></p>
+        <p>{{prod.desc}}</p>
+        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="" data-layout="standard" data-action="recommend" data-size="large" data-share="true"></div>
+        <div class="fb-comments" data-href="http://127.0.0.1:8000/products/" data-numposts="5" data-width=""></div>
+    </div>
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}

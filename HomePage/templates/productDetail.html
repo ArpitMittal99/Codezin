@@ -1,0 +1,121 @@
+      {% extends "basic.html" %}
+{% block title%} ProductDetail - My Awesome Cart{% endblock %}
+{% block content %}
+        <!-- products Details -->
+    <div class="px-md-5 mt-3">
+        <div class="row m-0" style="min-height: 550px;border:2px solid darkcyan;border-radius:30px;overflow: hidden;">
+            <div class="col-md-5 p-0 text-center py-4 px-4" style="background-color: lightcyan;border-right:2px solid darkcyan; display: flex;justify-content: center;align-items: center;">
+                 <img src="/media/{{ product.prod_image }}" width="450px" height="450px" class="img-fluid" style="border-radius: 50%;" >
+                
+            </div>
+            <div class="col-md-7 text-center p-2" style="background-color: rgb(248, 249, 250);color: rgb(30, 122, 97);display: flex;justify-content: center;align-items: center;flex-direction: column;">
+              <p class="text-center addinfo"></p>
+                <h4>{{ product.prod_name }}</h4>
+                <p>{{ product.prod_desc }}</p>
+                <div style="display: flex;justify-content: space-around;align-items: center;width: 100%;">
+
+                <h4 class="my-3"><b >₹ {{ product.prod_price }}/kg</b></h4>
+               <!--  <p>qunatity: <input class="text-center" type="text" name="qunatity" value="1" style="width: 40px;"> Kg</p> -->
+                </div>
+                  <ul style="display: inline-block;padding: 0px;margin: 0px;list-style-type: none; ">
+                <li style="display: inline-block;"><button  class="nav-link addtowish" style="border:1px solid darkcyan;"  data-prodid="{{ product.product_id }}"><i class="fa fa-heart" data-prodid="{{ product.product_id }}" style="font-size: 25px;color: rgb(30, 122, 97);"></i> <span style="color: darkcyan;" data-prodid="{{ product.product_id }}">Add To Wishlist</span></button></li>
+                <li style="display: inline-block;"><button  class="nav-link addtocart removewishlist" style="border:1px solid darkcyan;" data-prodid="{{ product.product_id }}"><i data-prodid="{{ product.product_id }}" class="fa fa-shopping-bag" style="font-size: 25px;color: rgb(30, 122, 97);" ></i> <span data-prodid="{{ product.product_id }}" style="color: darkcyan;">Add To Cart</span></button></li>
+            </ul>
+<br>
+<br><br>
+                <b >Share With Others:-</b>
+
+                <div class="container px-md-5 mt-3" style="display: flex;justify-content: space-around;align-items: center;">
+                          <a href="#" class="ml-2"><i class="fab fa-facebook" style="font-size: 25px;color: rgb(30, 122, 97);"></i></a>
+            <a href="#" class="ml-2"><i class="fab fa-twitter" style="font-size: 25px;color: rgb(30, 122, 97);"></i></a>
+            <a href="#" class="ml-2"><i class="fab fa-linkedin" style="font-size: 25px;color: rgb(30, 122, 97);"></i></a>
+            <a href="#" class="ml-2"><i class="fab fa-pinterest-p" style="font-size: 25px;color: rgb(30, 122, 97);"></i></a>
+                    
+                </div>
+
+            </div>
+            
+        </div>
+        <!-- reviews -->
+<!--         <div class="bg-light p-md-5 p-4" style="color: rgb(17, 104, 79);">
+          <hr>
+            <h5 class="text-center"><b>Reviews About This Product</b></h5>
+               <% for(i=0;i<blogs.length;i++){ %>
+        <div class="col-sm-4 p-0 px-2 " style="display: flex;justify-content: space-between;align-items: center;border-bottom: 2px solid darkcyan;border: 2px solid darkcyan;">
+       
+            <span><i class="fa fa-user mr-1"></i>{{ blogs[i].name %></span>
+            <span><i class="fa fa-clock mr-1"></i>{{ time[i] %></span>
+            <span><i class="fa fa-calendar mr-1"></i>{{ date[i] %></span>
+            
+            
+        </div>
+  
+        <p class="my-3">{{ blogs[i].message %></p>
+         <hr>   
+         <% } %>  
+         <% if(blogs.length==0) {%>
+         <p class="text-center text-danger"><b>No Blog Post Here Be the first one to post something about this product</b></p>
+         <hr>
+         <% } %>
+
+            
+            <div >
+                <b>Write Your Review</b>
+    <form class="mt-3 p-sm-5 p-2" style="border:2px solid darkcyan;background-color: rgb(199, 251, 252);border-radius: 10px;" action='/users/blog/{{ product.prod_id %>' method="post">
+        <div class="mb-5" id="formrow" style="display: flex;justify-content: space-between;align-items: center;">
+        <input type="text" name="blog_name" class="form-control col-md-5 col-12 mb-md-0 mb-5" placeholder="Your Name">
+        <input type="text" name="blog_email" class="form-control col-md-5 col-12" placeholder="Your last Name">
+        </div>
+        <textarea class="form-control py-4" style="resize: none;" placeholder="Type Your Review Here...." name="blog_msg"></textarea>
+        <input type="submit" name="submit" class="btn btn-block btn-light mt-4">
+    </form>
+</div>
+    </div> -->
+
+        
+    </div>
+
+    {% endblock %}
+
+    {% block script %}
+
+<script type="text/javascript">
+  var wishlist=JSON.parse(localStorage.getItem('mywish'));
+       if(wishlist==null || wishlist==undefined)
+          {
+            wishlist={}
+            x=0
+
+          }
+          else
+          {
+           
+            Array.from(document.getElementsByClassName('mywishitems')).map(elem=>elem.innerHTML=Object.keys(wishlist).length);
+            var keys=Object.keys(wishlist);
+            }
+  Array.from(document.getElementsByClassName('addtowish')).map(elem=>elem.addEventListener('click',addToWishlist));
+ function addToWishlist(e){
+ prod_id=this.getAttribute('data-prodid');
+             if(wishlist[prod_id] === undefined )
+           {
+        
+            wishlist[prod_id]=1
+           }
+           else
+           {
+            alert("already added to wishlist");
+           }
+           totalitem=Object.keys(wishlist).length;
+           localStorage.setItem('mywish',JSON.stringify(wishlist));
+                    axios.post('/sessionstore/',{
+   "Wish":wishlist
+  }).then(function(response){
+  
+    // document.getElementsByClassName('message')[0].innerHTML=response.data;
+          Array.from(document.getElementsByClassName('mywishitems')).map(elem=>{elem.innerHTML=totalitem});
+         }).catch(err=>console.log(err));
+
+ }
+</script>
+
+{% endblock %}

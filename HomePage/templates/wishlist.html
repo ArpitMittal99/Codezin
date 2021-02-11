@@ -1,0 +1,207 @@
+{% extends 'basic.html' %}
+{{products}}
+{% block css %}
+<style type="text/css">
+	.dec,.inc
+{
+  padding:5px 15px;
+  background-color: darkcyan;
+  color: #fff;
+  border-radius:50%;
+  border:none;
+}
+.dec:focus,.inc:focus
+{
+	outline: none;
+}
+.prodtable
+{
+	max-width: 100%;
+	overflow: auto;
+
+}
+.incdec
+{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+</style>
+{% endblock %}
+{% block  content %}
+{% if wishlist %}
+ <h3 class="text-center my-5 mt-2" ><b style="border-left: 3px solid green;padding: 10px;"><span style="border-bottom: 3px solid green;padding: 0px;color: rgb(15, 137, 105)">Products in My Wishlist</span></b></h3>
+<div class="mx-md-5 prodtable" >
+
+<table class="table table-bordered table-info text-center" style="color: rgb(17, 132, 119);">
+  <thead>
+    <td><b>S. No</b></td>
+    <td><b>Image</b></td>
+
+    <td><b>Name</b></td>
+    <td><b>Add to Cart</b></td>
+    <td><b>Price</b></td>
+    <td><b>Remove</b></td>
+  </thead>
+<!-- 
+  <p class="text-center text-danger"><b>No Product Present in the Cart</b></p>
+<a href="/manufacturer/products/" class="btn btn-sm btn-outline-info nav-link my-3 ">Back To Shopping</a> -->
+
+
+
+  {% for i in wishlist %}
+  <tr>
+    <td>1</td>
+    <td><img src="/media/{{i.prod_image}}/" width="50px" height="50px"></td>
+
+    <td>{{i.prod_name }}</td>
+  <!--   <td  class="incdec"><button class="dec">-</button><span class="px-3 prodquantity" testprodid="{{ i.product_id }}" style="font-weight: bolder" >{% for x,j in prodid_quant.items %} {% if x == i.product_id %}{{j}} {% endif %}{% endfor %}</span><button class="inc">+</button> </td> -->
+  <td><p class="text-center cartfromwish" data-prodid="{{ i.product_id }}" style="cursor: pointer;"><i data-prodid="{{ i.product_id }}" style="color:darkcyan;" class="fa fa-shopping-bag"></i>Add To Cart</p></td>
+    <td class="{{ i.product_id }}">{{ i.prod_price }}</td>
+    <td><a href="#" data-prodid="{{ i.product_id }}" class="btn btn-sm btn-outline-danger removewish" >Remove</a>
+     </td>
+
+  </tr>
+  {% endfor %}
+
+  
+</table>
+</div>
+{% endif %}
+{% if wishlist2 %}
+<h2 class="text-center text-primary">BestSellers</h2>
+<div class="mx-md-5 prodtable" >
+
+<table class="table table-bordered table-info text-center" style="color: rgb(17, 132, 119);">
+  <thead>
+    <td><b>S. No</b></td>
+    <td><b>Image</b></td>
+
+    <td><b>Name</b></td>
+    <td><b>Add to Cart</b></td>
+    <td><b>Price</b></td>
+    <td><b>Remove</b></td>
+  </thead>
+<!-- 
+  <p class="text-center text-danger"><b>No Product Present in the Cart</b></p>
+<a href="/manufacturer/products/" class="btn btn-sm btn-outline-info nav-link my-3 ">Back To Shopping</a> -->
+
+
+
+  {% for i in wishlist2 %}
+  <tr>
+    <td>1</td>
+    <td><img src="/media/{{i.bestseller_image}}/" width="50px" height="50px"></td>
+
+    <td>{{i.bestseller_name }}</td>
+  <!--   <td  class="incdec"><button class="dec">-</button><span class="px-3 prodquantity" testprodid="{{ i.product_id }}" style="font-weight: bolder" >{% for x,j in prodid_quant.items %} {% if x == i.product_id %}{{j}} {% endif %}{% endfor %}</span><button class="inc">+</button> </td> -->
+  <td><p class="text-center cartfromwish" data-prodid="{{ i.bestseller_id }}" style="cursor: pointer;"><i data-prodid="{{ i.bestseller_id }}" style="color:darkcyan;" class="fa fa-shopping-bag"></i>Add To Cart</p></td>
+    <td class="{{ i.bestseller_id }}">{{ i.bestseller_price }}</td>
+    <td><a href="#" data-prodid="{{ i.bestseller_id }}" class="btn btn-sm btn-outline-danger removewish" >Remove</a>
+     </td>
+
+  </tr>
+  {% endfor %}
+
+  
+</table>
+</div>
+{% endif %}
+{% if wishlist3 %}
+<h2 class="text-center text-primary">BestSellers</h2>
+<div class="mx-md-5 prodtable" >
+
+<table class="table table-bordered table-info text-center" style="color: rgb(17, 132, 119);">
+  <thead>
+    <td><b>S. No</b></td>
+    <td><b>Image</b></td>
+
+    <td><b>Name</b></td>
+    <td><b>Add to Cart</b></td>
+    <td><b>Price</b></td>
+    <td><b>Remove</b></td>
+  </thead>
+<!-- 
+  <p class="text-center text-danger"><b>No Product Present in the Cart</b></p>
+<a href="/manufacturer/products/" class="btn btn-sm btn-outline-info nav-link my-3 ">Back To Shopping</a> -->
+
+
+
+  {% for i in wishlist3 %}
+  <tr>
+    <td>1</td>
+    <td><img src="/media/{{i.offer_image}}/" width="50px" height="50px"></td>
+
+    <td>{{i.offer_name }}</td>
+  <!--   <td  class="incdec"><button class="dec">-</button><span class="px-3 prodquantity" testprodid="{{ i.product_id }}" style="font-weight: bolder" >{% for x,j in prodid_quant.items %} {% if x == i.product_id %}{{j}} {% endif %}{% endfor %}</span><button class="inc">+</button> </td> -->
+  <td><p class="text-center cartfromwish" data-prodid="{{ i.offer_id }}" style="cursor: pointer;"><i data-prodid="{{ i.offer_id }}" style="color:darkcyan;" class="fa fa-shopping-bag"></i>Add To Cart</p></td>
+    <td class="{{ i.offer_id }}">{{ i.offer_price }}</td>
+    <td><a href="#" data-prodid="{{ i.offer_id }}" class="btn btn-sm btn-outline-danger removewish" >Remove</a>
+     </td>
+
+  </tr>
+  {% endfor %}
+
+  
+</table>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script type="text/javascript">
+   Array.from(document.getElementsByClassName('cartfromwish')).map(elem=>elem.addEventListener('click',AddCartFromWish));
+   function AddCartFromWish(e){
+    id=this.getAttribute('data-prodid')
+    var cart=JSON.parse(localStorage.getItem('mycart'));
+    if(cart !== null && cart !== undefined)
+    cart[id]=1;
+  else
+  {
+    cart={}
+     cart[id]=1;
+  }
+    localStorage.setItem('mycart',JSON.stringify(cart));
+             axios.post('/sessionstore/',{
+   "Cart":cart
+  }).then(function(response){
+    //alert(response)
+        RemoveLS(e);
+    // document.getElementsByClassName('message')[0].innerHTML=response.data;
+         // Array.from(document.getElementsByClassName('mybagitems')).map(elem=>{elem.innerHTML=totalitem});
+         }).catch(err=>console.log(err));
+
+ 
+   }
+ Array.from(document.getElementsByClassName('removewish')).map(elem=>elem.addEventListener('click',RemoveLS));
+function RemoveLS(e)
+{
+	e.preventDefault();
+var delprod=e.target.getAttribute('data-prodid')
+  var ls=JSON.parse(localStorage.getItem('mywish'));
+  if(ls == null || ls== undefined)
+  {
+  	    axios.post('/sessionstore/',{
+   "Wish":{}
+  }).then(function(response){
+          console.log(response.data);
+           	  window.location="/"
+         }).catch(err=>console.log(err));
+
+  }
+  // console.log(delprod)
+  // console.log(ls);
+  delete ls[delprod]
+  localStorage.setItem('mywish',JSON.stringify(ls));
+    axios.post('/sessionstore/',{
+   "Wish":ls
+  }).then(function(response){
+          console.log(response.data);
+          location.reload();
+         }).catch(err=>console.log(err));
+
+
+}
+</script>
+{% endblock %}

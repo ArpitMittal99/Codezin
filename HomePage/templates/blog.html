@@ -1,0 +1,43 @@
+{% extends 'basic.html' %}
+{% block title %}
+Blog Page
+{% endblock %}
+
+{% block content %}
+<div class="row px-md-5 mx-md-5">
+   <div class="col-md-4">
+       <img src="/media/{{blog.image}}" class="img-fluid">
+   </div>
+     <div class="col-md-8 text-center" >
+       <h3>{{blog.title}}</h3>
+   </div>     
+   <p class="blogtext col-12 mt-4 table-primary p-3">{{blog.description|truncatechars:200}}</p>
+   <a href="javascript:void(0)" class="nav-link showmore">Show more</a>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    target=document.getElementsByClassName('showmore')[0];
+    target.addEventListener('click',ShowContent);
+    function ShowContent(e)
+    {
+        //this.classList.remove('showmore')
+        // this.classList.add('show')
+        if(this.innerHTML== "Show more")
+        {
+          document.getElementsByClassName('blogtext')[0].innerHTML=`{{blog.description}}`
+          this.innerHTML="Show less"
+        }
+        else if(this.innerHTML== "Show less")
+        {
+                    document.getElementsByClassName('blogtext')[0].innerHTML=`{{blog.description|truncatechars:100}}`
+          this.innerHTML="Show more"
+        }
+  
+         
+    }
+
+</script>
+{% endblock %}
